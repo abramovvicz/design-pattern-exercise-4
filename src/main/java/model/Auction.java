@@ -24,6 +24,10 @@ public class Auction {
         this.buyer = buyer;
     }
 
+    public Auction() {
+
+    }
+
     public int getId() {
         return id;
     }
@@ -78,5 +82,62 @@ public class Auction {
 
     public void setBuyer(Customer buyer) {
         this.buyer = buyer;
+    }
+
+    public static class AuctionBuilder {
+        private int id;
+
+        private String item;
+        private String description;
+        private LocalDateTime dueDate;
+
+        private Customer seller;
+
+        private double highestBid;
+        private Customer buyer;
+
+
+        public AuctionBuilder(int id, String item) {
+            this.id = id;
+            this.item = item;
+        }
+
+        public AuctionBuilder withDescription(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public AuctionBuilder withDueDate(LocalDateTime dueDate) {
+            this.dueDate = dueDate;
+            return this;
+        }
+
+
+        public AuctionBuilder withSeller(Customer seller) {
+            this.seller = seller;
+            return this;
+        }
+
+        public AuctionBuilder withHighestBid(double highestBid) {
+            this.highestBid = highestBid;
+            return this;
+        }
+
+        public AuctionBuilder withBuyer(Customer buyer) {
+            this.buyer = buyer;
+            return this;
+        }
+
+
+        public Auction build() {
+            Auction auction = new Auction();
+            auction.setDescription(this.description);
+            auction.setBuyer(this.buyer);
+            auction.setDueDate(this.dueDate);
+            auction.setHighestBid(this.highestBid);
+            auction.setSeller(this.seller);
+            return auction;
+        }
+
     }
 }
